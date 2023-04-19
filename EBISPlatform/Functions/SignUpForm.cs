@@ -19,10 +19,8 @@ namespace EBISPlatform.Functions
 
         private void SignUpForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //LoginForm l = new LoginForm();
-            //l.Show();
-            //this.Close();
-            LoginForm.ActiveForm.Show();
+            var l = Application.OpenForms["LoginForm"];
+            l.Enabled = true;
         }
     }
 }
