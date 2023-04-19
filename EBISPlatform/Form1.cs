@@ -26,9 +26,17 @@ namespace EBISPlatform
 
         private void loginLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            SignUpForm s = new SignUpForm();
-            s.Show();
-            this.Hide();
+            if (Application.OpenForms["SignUpForm"] == null)
+            {
+                SignUpForm s = new SignUpForm();
+                s.Show();
+            }
+            else
+            {
+                var s = Application.OpenForms["SignUpForm"];
+                s.Show();
+            }
+            this.Enabled = false;
         }
     }
 }
