@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EBISPlatform.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace EBISPlatform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ConfigJson configJson = new ConfigJson();
+            configJson.ConfigureJsonAsync().GetAwaiter();
             Application.Run(new LoginForm());
         }
     }
