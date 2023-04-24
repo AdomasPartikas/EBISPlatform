@@ -18,7 +18,7 @@ namespace EBISPlatform
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ConfigJson configJson = new ConfigJson();
-            configJson.ConfigureJsonAsync().GetAwaiter();
+            configJson.ConfigureJsonAsync().GetAwaiter().GetResult();
             Application.Run(new LoginForm());
         }
     }

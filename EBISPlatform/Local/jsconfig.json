@@ -1,3 +1,1 @@
-{
-  "mysqlConnection": "Server=127.0.0.1;Database=ebis;Uid=rootas;Pwd=root;"
-}
+{"username":"asd","password":"asd","mysqlConnection":"Server=127.0.0.1;Database=ebis;Uid=rootas;Pwd=root;"}

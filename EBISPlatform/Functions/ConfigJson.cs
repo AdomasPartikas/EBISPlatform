@@ -22,10 +22,22 @@ namespace EBISPlatform.Functions
 
             jsonConfig = JsonConvert.DeserializeObject<Config>(json);
         }
+        public async Task EditJsonAsync(string username, string password)
+        {
+            jsonConfig.Username = username;
+            jsonConfig.Password = password;
+
+            var json = JsonConvert.SerializeObject(jsonConfig);
+            File.WriteAllText(@"..\..\Local\jsconfig.json", json);
+        }
     }
 
     public class Config
     {
+        [JsonProperty("username")]
+        public string Username { get; set; }
+        [JsonProperty("password")]
+        public string Password { get; set; }
         [JsonProperty("mysqlConnection")]
         public string MySqlConnection { get; set; }
     }
