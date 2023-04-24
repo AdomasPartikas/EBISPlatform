@@ -18,9 +18,9 @@ namespace EBISPlatform.Functions
         {
             EstablishConnection();
 
-            if (IsExisting("Paskyros", "El_Pastas", user.Email))
+            if (IsExisting("Paskyros", "El_Pastas", user.Email, false,"",""))
                 return $"Email '{user.Email}' is already being used!";
-            else if (IsExisting("Paskyros", "Vartotojo_Prisijungimas", user.UserName))
+            else if (IsExisting("Paskyros", "Vartotojo_Prisijungimas", user.UserName, false,"",""))
                 return $"Username '{user.UserName}' is already being used!";
             else
             {
@@ -33,9 +33,25 @@ namespace EBISPlatform.Functions
             _connection.Close();
             return string.Empty;
         }
-        public bool IsExisting(string table, string where, string element)
+        public bool IsLoginValid(string username, string password)
         {
-            var cmd = new MySqlCommand($"select count(*) from {table} where {where} = '{element}'",_connection);
+            EstablishConnection();
+
+            if (IsExisting("Paskyros", "Vartotojo_Prisijungimas", username, true, "Slaptazodis", password) || IsExisting("Paskyros", "El_Pastas", username, true, "Slaptazodis", password))
+            {
+                _connection.Close();
+                return true;
+            }
+            _connection.Close();
+            return false;
+        }
+        public bool IsExisting(string table, string where, string element, bool and, string where2, string element2)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            if(and)
+                cmd = new MySqlCommand($"select count(*) from {table} where {where} = '{element}' AND {where2} = '{element2}'", _connection);
+            else
+                cmd = new MySqlCommand($"select count(*) from {table} where {where} = '{element}'",_connection);
             object obj = cmd.ExecuteScalar();
 
             if (Convert.ToInt32(obj) == 0)
